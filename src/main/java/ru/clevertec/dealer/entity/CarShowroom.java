@@ -1,5 +1,6 @@
 package ru.clevertec.dealer.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,15 +30,12 @@ public class CarShowroom {
     private Long showroomId;
     private String nameOfShowroom;
     private String addressOfShowroom;
-    @OneToMany(mappedBy = "carShowroom", orphanRemoval = true)
+    @OneToMany(mappedBy = "carShowroom", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Car> carInStore;
 
     public void addCarToStore(Car car) {
         car.setCarShowroom(this);
         carInStore.add(car);
-    }
-    private void deleteFromStore(Car car) {
-        carInStore.remove(car);
     }
 
 }
