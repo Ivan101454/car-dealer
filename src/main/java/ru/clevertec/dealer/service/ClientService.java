@@ -40,6 +40,15 @@ public class ClientService {
         return client.isPresent();
     }
 
+    public void buyCar(Long idOfClient, CarDto carDto) {
+        Optional<Client> client = Optional.ofNullable(clientRepository.finById(idOfClient)
+                .orElseThrow(() -> new RuntimeException("Клиент не найден")));
+        client.ifPresent(c -> c.buyACar(CarMapper.INSTANCE.carDtoToCar(carDto)));
+        client.ifPresent(clientRepository::update);
+    }
+
+
+
 
 
 }

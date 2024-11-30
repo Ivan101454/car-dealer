@@ -1,5 +1,6 @@
 package ru.clevertec.dealer.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -39,12 +40,19 @@ public class Client {
     @CollectionTable(name = "contact", joinColumns = @JoinColumn(name = "client_id"), schema = "dealer")
     private List<String> contacts;
     private LocalDate dateOfRegistration;
-    @ManyToMany(mappedBy = "clients")
+    @ManyToMany(mappedBy = "clients", cascade = CascadeType.ALL)
     private List<Car> cars;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviewOnCar;
 
     public void buyACar(Car car) {
         cars.add(car);
+    }
+
+    private void addReview(Review review, Car car, String text, int rating) {
+        review.setCar(car);
+        review.setRating(rating);
+        review.setTextReview(text);
+        reviewOnCar.add(review);
     }
 }
