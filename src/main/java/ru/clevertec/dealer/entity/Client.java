@@ -28,7 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "category", schema = "dealer")
+@Table(name = "client", schema = "dealer")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,5 +42,5 @@ public class Client {
     @ManyToMany(mappedBy = "clients")
     private List<Car> cars;
     @OneToMany(mappedBy = "client")
-    private Review reviewOnCar;
+    private List<Review> reviewOnCar;
 }
