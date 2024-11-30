@@ -44,10 +44,14 @@ public class Car {
     @OneToMany(mappedBy = "car")
     private List<Review> reviewsOnCar;
     @ManyToMany
-    @JoinTable(
+    @JoinTable(schema = "dealer",
             name = "car_client",
             joinColumns = @JoinColumn(name = "car_id"),
             inverseJoinColumns = @JoinColumn(name = "client_id")
     )
     private List<Client> clients;
+
+    public void addReviewOnCar(Review review) {
+        reviewsOnCar.add(review);
+    }
 }

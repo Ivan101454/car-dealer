@@ -1,4 +1,4 @@
-package ru.clevertec.utils;
+package ru.clevertec.dealer.utils;
 
 import lombok.experimental.UtilityClass;
 import org.hibernate.SessionFactory;

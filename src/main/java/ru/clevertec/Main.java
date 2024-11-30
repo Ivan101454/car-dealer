@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.lang.reflect.Proxy;
-import ru.clevertec.utils.HibernateUtil;
+import ru.clevertec.dealer.utils.HibernateUtil;
 
 
 public class Main {

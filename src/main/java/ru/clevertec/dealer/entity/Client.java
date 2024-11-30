@@ -43,4 +43,8 @@ public class Client {
     private List<Car> cars;
     @OneToMany(mappedBy = "client")
     private List<Review> reviewOnCar;
+
+    public void buyACar(Car car) {
+        cars.add(car);
+    }
 }

@@ -8,4 +8,6 @@ public class CarShowroomRepository extends RepositoryBase<Long, CarShowroom> {
     public CarShowroomRepository(Session session) {
         super(CarShowroom.class, session);
     }
+
+
 }

@@ -29,6 +29,14 @@ public class CarShowroom {
     private Long showroomId;
     private String nameOfShowroom;
     private String addressOfShowroom;
-    @OneToMany(mappedBy = "carShowroom")
+    @OneToMany(mappedBy = "carShowroom", orphanRemoval = true)
     private List<Car> carInStore;
+
+    public void addCarToStore(Car car) {
+        carInStore.add(car);
+    }
+    private void deleteFromStore(Car car) {
+        carInStore.remove(car);
+    }
+
 }
