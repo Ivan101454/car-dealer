@@ -33,6 +33,7 @@ public class CarShowroom {
     private List<Car> carInStore;
 
     public void addCarToStore(Car car) {
+        car.setCarShowroom(this);
         carInStore.add(car);
     }
     private void deleteFromStore(Car car) {

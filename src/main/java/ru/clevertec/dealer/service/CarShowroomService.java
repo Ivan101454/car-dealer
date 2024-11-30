@@ -1,6 +1,7 @@
 package ru.clevertec.dealer.service;
 
 import lombok.RequiredArgsConstructor;
+import ru.clevertec.dealer.dto.CarDto;
 import ru.clevertec.dealer.dto.CarShowroomDto;
 import ru.clevertec.dealer.entity.CarShowroom;
 import ru.clevertec.dealer.mapper.CarMapper;
@@ -35,6 +36,10 @@ public class CarShowroomService {
         Optional<CarShowroom> carShowroom = carShowroomRepository.finById(id);
         carShowroom.ifPresent(a -> carShowroomRepository.delete(a.getShowroomId()));
         return carShowroom.isPresent();
+    }
+
+    public void addCarToStore(CarDto carDto, Long idOfCarShowroom) {
+
     }
 
 }

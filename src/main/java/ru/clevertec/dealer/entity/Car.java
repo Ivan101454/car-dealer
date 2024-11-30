@@ -52,6 +52,7 @@ public class Car {
     private List<Client> clients;
 
     public void addReviewOnCar(Review review) {
+        review.setCar(this);
         reviewsOnCar.add(review);
     }
 }
