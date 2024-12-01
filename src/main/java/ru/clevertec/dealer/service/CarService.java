@@ -39,4 +39,8 @@ public class CarService {
         return car.isPresent();
     }
 
+    public List<CarDto> findByBrand(String brand) {
+        return null;
+    }
+
 }

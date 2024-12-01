@@ -3,10 +3,15 @@ package ru.clevertec.dealer.repository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
+import org.hibernate.query.criteria.HibernateCriteriaBuilder;
+import org.hibernate.query.criteria.JpaCriteriaQuery;
+import org.hibernate.query.criteria.JpaRoot;
+import ru.clevertec.dealer.entity.Car;
 
 import java.util.List;
 import java.util.Optional;
 
+@Getter
 @RequiredArgsConstructor
 public abstract class RepositoryBase<K, E> implements Repository<K, E> {
 

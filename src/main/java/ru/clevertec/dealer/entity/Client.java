@@ -50,9 +50,9 @@ public class Client {
     }
 
     private void addReview(Review review, Car car, String text, int rating) {
-        review.setCar(car);
         review.setRating(rating);
         review.setTextReview(text);
+        car.addReviewOnCar(review);
         reviewOnCar.add(review);
     }
 }
