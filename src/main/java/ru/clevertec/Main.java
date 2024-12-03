@@ -1,9 +1,17 @@
 package ru.clevertec;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.hibernate.Session;
+
+import ru.clevertec.dealer.utils.HibernateUtil;
+
+
 public class Main {
+
     public static void main(String[] args) {
+        Session session = HibernateUtil.initDatabaseSession();
 
     }
+
+
+
 }
