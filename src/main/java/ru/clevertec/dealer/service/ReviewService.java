@@ -41,7 +41,7 @@ public class ReviewService {
         return review.isPresent();
     }
 
-    public List<ReviewDto> findReviewByKeywords(List<String> keywords) {
-        return reviewRepository.findByKeywords(keywords).stream().map(CarMapper.INSTANCE::reviewToReviewDto).toList();
+    public List<ReviewDto> findReviewByKeywords(List<String> keywords, int pageNumber, int pageSize) {
+        return reviewRepository.findByKeywords(keywords, pageNumber, pageSize).stream().map(CarMapper.INSTANCE::reviewToReviewDto).toList();
     }
 }

@@ -16,7 +16,7 @@ import ru.clevertec.dealer.entity.Review;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-01T23:03:47+0300",
+    date = "2024-12-03T14:39:27+0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 public class CarMapperImpl implements CarMapper {

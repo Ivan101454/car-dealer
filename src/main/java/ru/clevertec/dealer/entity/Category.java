@@ -2,6 +2,8 @@ package ru.clevertec.dealer.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,6 +30,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long categoryId;
+    @Enumerated(value = EnumType.STRING)
     private Body body;
     @OneToMany(mappedBy = "categoryBody")
     private List<Car> listOfCar;
