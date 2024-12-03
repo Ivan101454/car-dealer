@@ -21,4 +21,6 @@ public class CarParam {
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
     private Category categoryBody;
+    private boolean isRequiredSort;
+    private boolean isDescent;
 }

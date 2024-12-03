@@ -9,13 +9,9 @@ import ru.clevertec.dealer.entity.Car;
 import ru.clevertec.dealer.entity.Car_;
 import ru.clevertec.dealer.filter.CarParam;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
 
 public class CarRepository extends RepositoryBase<Long, Car> {
 
@@ -24,12 +20,11 @@ public class CarRepository extends RepositoryBase<Long, Car> {
         super(Car.class, session);
     }
 
-    public List<Car> getFilterCar(CarParam params, Pageable pageable) {
+    public List<Car> getFilterCar(CarParam params, int pageNumber, int pageSize) {
         Session session = super.getSession();
         HibernateCriteriaBuilder cb = session.getCriteriaBuilder();
         JpaCriteriaQuery<Car> criteria = cb.createQuery(Car.class);
         JpaRoot<Car> root = criteria.from(Car.class);
-
 
         JpaPredicate predicateBrand = cb.equal(root.get(Car_.carBrand), params.getCarBrand());
         JpaPredicate predicateYear = cb.between(root.get(Car_.year), params.getStartDate(), params.getEndDate());
@@ -39,11 +34,13 @@ public class CarRepository extends RepositoryBase<Long, Car> {
         List<JpaPredicate> predicates = new ArrayList<>(list);
 
         criteria.where(cb.and(predicates.toArray(new JpaPredicate[predicates.size()])));
-        criteria.orderBy(cb.desc(root.get(Car_.carId)));
 
-//        criteria.where(predictBrand);
-        return session.createQuery(criteria).getResultList();
+        if (params.isRequiredSort()) {
+            if (params.isDescent()) {
+                criteria.orderBy(cb.desc(root.get(Car_.carId)));
+            } else criteria.orderBy(cb.asc(root.get(Car_.carId)));
+        }
+
+        return session.createQuery(criteria).setFirstResult((pageNumber-1)*pageSize).setMaxResults(pageSize).getResultList();
     }
-
-
 }

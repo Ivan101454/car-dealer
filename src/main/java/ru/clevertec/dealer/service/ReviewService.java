@@ -40,4 +40,8 @@ public class ReviewService {
         review.ifPresent(a -> reviewRepository.delete(a.getReviewId()));
         return review.isPresent();
     }
+
+    public List<ReviewDto> findReviewByKeywords(List<String> keywords) {
+        return reviewRepository.findByKeywords(keywords).stream().map(CarMapper.INSTANCE::reviewToReviewDto).toList();
+    }
 }

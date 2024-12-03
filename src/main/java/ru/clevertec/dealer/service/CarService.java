@@ -5,9 +5,11 @@ import ru.clevertec.dealer.dto.CarDto;
 import ru.clevertec.dealer.dto.CarShowroomDto;
 import ru.clevertec.dealer.entity.Car;
 import ru.clevertec.dealer.entity.CarShowroom;
+import ru.clevertec.dealer.filter.CarParam;
 import ru.clevertec.dealer.mapper.CarMapper;
 import ru.clevertec.dealer.repository.CarRepository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +41,9 @@ public class CarService {
         return car.isPresent();
     }
 
-    public List<CarDto> findByBrand(String brand) {
-        return null;
+    public List<CarDto> getCarsByFilter(CarParam carParam, int pageNumber, int pageSize) {
+        List<Car> filterCar = carRepository.getFilterCar(carParam, pageNumber, pageSize);
+        return filterCar.stream().map(CarMapper.INSTANCE::carToCarDto).toList();
     }
 
 }
