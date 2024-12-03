@@ -3,6 +3,7 @@ package ru.clevertec.dealer.entity;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,10 +38,11 @@ public class Car {
     private String carModel;
     private int year;
     private BigDecimal price;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category categoryBody;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "showroom_id")
     private CarShowroom carShowroom;
     @OneToMany(mappedBy = "car")
     private List<Review> reviewsOnCar;

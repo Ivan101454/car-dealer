@@ -26,12 +26,23 @@ public class CarRepository extends RepositoryBase<Long, Car> {
         JpaCriteriaQuery<Car> criteria = cb.createQuery(Car.class);
         JpaRoot<Car> root = criteria.from(Car.class);
 
-        JpaPredicate predicateBrand = cb.equal(root.get(Car_.carBrand), params.getCarBrand());
-        JpaPredicate predicateYear = cb.between(root.get(Car_.year), params.getStartDate(), params.getEndDate());
-        JpaPredicate predicatePrice = cb.between(root.get(Car_.price), params.getMinPrice(), params.getMaxPrice());
-        JpaPredicate predicateCategoryBody = cb.equal(root.get(Car_.categoryBody), params.getCategoryBody());
-        List<JpaPredicate> list = Arrays.asList(predicateBrand, predicateYear, predicatePrice, predicateCategoryBody);
-        List<JpaPredicate> predicates = new ArrayList<>(list);
+        List<JpaPredicate> predicates = new ArrayList<>();
+        if (params.getCarBrand() != null) {
+            JpaPredicate predicateBrand = cb.equal(root.get(Car_.carBrand), params.getCarBrand());
+            predicates.add(predicateBrand);
+        }
+        if (params.getStartDate() != 0) {
+            JpaPredicate predicateYear = cb.between(root.get(Car_.year), params.getStartDate(), params.getEndDate());
+            predicates.add(predicateYear);
+        }
+        if (params.getMinPrice() != null) {
+            JpaPredicate predicatePrice = cb.between(root.get(Car_.price), params.getMinPrice(), params.getMaxPrice());
+            predicates.add(predicatePrice);
+        }
+        if (params.getCategoryBody() != null) {
+            JpaPredicate predicateCategoryBody = cb.equal(root.get(Car_.categoryBody), params.getCategoryBody());
+            predicates.add(predicateCategoryBody);
+        }
 
         criteria.where(cb.and(predicates.toArray(new JpaPredicate[predicates.size()])));
 

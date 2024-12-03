@@ -16,7 +16,7 @@ import ru.clevertec.dealer.entity.Review;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-03T14:39:27+0300",
+    date = "2024-12-03T22:30:08+0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 public class CarMapperImpl implements CarMapper {
@@ -31,7 +31,6 @@ public class CarMapperImpl implements CarMapper {
 
         carShowroomDto.nameOfShowroom( carShowroom.getNameOfShowroom() );
         carShowroomDto.addressOfShowroom( carShowroom.getAddressOfShowroom() );
-        carShowroomDto.carInStore( carListToCarDtoList( carShowroom.getCarInStore() ) );
 
         return carShowroomDto.build();
     }
@@ -105,8 +104,6 @@ public class CarMapperImpl implements CarMapper {
             clientDto.contacts( new ArrayList<String>( list ) );
         }
         clientDto.dateOfRegistration( client.getDateOfRegistration() );
-        clientDto.cars( carListToCarDtoList( client.getCars() ) );
-        clientDto.reviewOnCar( reviewListToReviewDtoList( client.getReviewOnCar() ) );
 
         return clientDto.build();
     }
@@ -140,7 +137,6 @@ public class CarMapperImpl implements CarMapper {
         CategoryDto.CategoryDtoBuilder categoryDto = CategoryDto.builder();
 
         categoryDto.body( category.getBody() );
-        categoryDto.listOfCar( carListToCarDtoList( category.getListOfCar() ) );
 
         return categoryDto.build();
     }
@@ -170,7 +166,6 @@ public class CarMapperImpl implements CarMapper {
         reviewDto.textReview( review.getTextReview() );
         reviewDto.rating( review.getRating() );
         reviewDto.client( clientToClientDto( review.getClient() ) );
-        reviewDto.car( carToCarDto( review.getCar() ) );
 
         return reviewDto.build();
     }
@@ -189,19 +184,6 @@ public class CarMapperImpl implements CarMapper {
         review.car( carDtoToCar( reviewDto.getCar() ) );
 
         return review.build();
-    }
-
-    protected List<CarDto> carListToCarDtoList(List<Car> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<CarDto> list1 = new ArrayList<CarDto>( list.size() );
-        for ( Car car : list ) {
-            list1.add( carToCarDto( car ) );
-        }
-
-        return list1;
     }
 
     protected List<Car> carDtoListToCarList(List<CarDto> list) {

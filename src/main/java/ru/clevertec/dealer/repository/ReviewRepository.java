@@ -24,7 +24,7 @@ public class ReviewRepository extends RepositoryBase<Long, Review> {
 
         JpaPredicate[] predicates = new JpaPredicate[keywords.size()];
         for (int i=0; i< keywords.size(); i++) {
-            predicates[i] = cb.like(root.get(Review_.textReview), "%" + keywords.get(i) +"%");
+            predicates[i] = cb.ilike(root.get(Review_.textReview), "%" + keywords.get(i) +"%");
         }
 
         criteria.select(root).where(cb.and(predicates));
