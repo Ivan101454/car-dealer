@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,9 @@ public class Review {
     private String textReview;
     private int rating;
     @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
     @ManyToOne
+    @JoinColumn(name = "car_id")
     private Car car;
 }
