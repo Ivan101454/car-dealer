@@ -22,16 +22,17 @@ public class CarService {
         return carRepository.finById(id).map(CarMapper.INSTANCE::carToCarDto);
     }
 
-    public List<CarDto> findAllStore() {
+    public List<CarDto> findAllCars() {
         return carRepository.findAll().stream().map(CarMapper.INSTANCE::carToCarDto).toList();
     }
 
-    public Car create(CarDto carDto) {
+    public Optional<CarDto> create(CarDto carDto) {
         Car car = CarMapper.INSTANCE.carDtoToCar(carDto);
-        return carRepository.save(car);
+        carRepository.save(car);
+        return Optional.ofNullable(carDto);
     }
 
-    public void update(CarDto carDto) {
+    public void update(Long id, CarDto carDto) {
         carRepository.update(CarMapper.INSTANCE.carDtoToCar(carDto));
     }
 

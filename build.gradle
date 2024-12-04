@@ -10,6 +10,11 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework:spring-context:6.2.0'
+    implementation 'org.springframework:spring-webmvc:6.2.0'
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+
+
     implementation 'org.hibernate.orm:hibernate-core:6.6.3.Final'
     implementation 'org.postgresql:postgresql:42.7.4'
 
