@@ -1,0 +1,50 @@
+package ru.clevertec.dealer.service;
+
+import lombok.RequiredArgsConstructor;
+import ru.clevertec.dealer.dto.CarDto;
+import ru.clevertec.dealer.dto.CarShowroomDto;
+import ru.clevertec.dealer.entity.Car;
+import ru.clevertec.dealer.entity.CarShowroom;
+import ru.clevertec.dealer.filter.CarParam;
+import ru.clevertec.dealer.mapper.CarMapper;
+import ru.clevertec.dealer.repository.CarRepository;
+
+import java.awt.print.Pageable;
+import java.util.List;
+import java.util.Optional;
+
+@RequiredArgsConstructor
+public class CarService {
+
+    private final CarRepository carRepository;
+
+    public Optional<CarDto> findById(Long id) {
+        return carRepository.finById(id).map(CarMapper.INSTANCE::carToCarDto);
+    }
+
+    public List<CarDto> findAllCars() {
+        return carRepository.findAll().stream().map(CarMapper.INSTANCE::carToCarDto).toList();
+    }
+
+    public Optional<CarDto> create(CarDto carDto) {
+        Car car = CarMapper.INSTANCE.carDtoToCar(carDto);
+        carRepository.save(car);
+        return Optional.ofNullable(carDto);
+    }
+
+    public void update(Long id, CarDto carDto) {
+        carRepository.update(CarMapper.INSTANCE.carDtoToCar(carDto));
+    }
+
+    public boolean delete(Long id) {
+        Optional<Car> car = carRepository.finById(id);
+        car.ifPresent(a -> carRepository.delete(a.getCarId()));
+        return car.isPresent();
+    }
+
+    public List<CarDto> getCarsByFilter(CarParam carParam, int pageNumber, int pageSize) {
+        List<Car> filterCar = carRepository.getFilterCar(carParam, pageNumber, pageSize);
+        return filterCar.stream().map(CarMapper.INSTANCE::carToCarDto).toList();
+    }
+
+}
