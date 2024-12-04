@@ -14,6 +14,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import ru.clevertec.dealer.enums.Body;
 
 import java.util.List;
@@ -33,5 +35,6 @@ public class Category {
     @Enumerated(value = EnumType.STRING)
     private Body body;
     @OneToMany(mappedBy = "categoryBody")
+    @Fetch(FetchMode.SUBSELECT)
     private List<Car> listOfCar;
 }

@@ -19,6 +19,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,13 +38,16 @@ public class Client {
     @Column(name = "client_id")
     private Long clientId;
     private String nameOfCustomer;
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = String.class, fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
     @CollectionTable(name = "contact", joinColumns = @JoinColumn(name = "client_id"), schema = "dealer")
     private List<String> contacts;
     private LocalDate dateOfRegistration;
     @ManyToMany(mappedBy = "clients", cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Car> cars;
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Review> reviewOnCar;
 
     public void buyACar(Car car) {

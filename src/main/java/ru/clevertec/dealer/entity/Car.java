@@ -18,6 +18,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -45,6 +47,7 @@ public class Car {
     @JoinColumn(name = "showroom_id")
     private CarShowroom carShowroom;
     @OneToMany(mappedBy = "car")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Review> reviewsOnCar;
     @ManyToMany
     @JoinTable(schema = "dealer",
