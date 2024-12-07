@@ -2,6 +2,7 @@ package ru.clevertec.dealer.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 import ru.clevertec.dealer.dto.CarDto;
@@ -27,6 +28,7 @@ public interface CarMapper {
     CarShowroom carShowroomDtoToCarShowroom(CarShowroomDto carShowroomDto);
 
     CarDto carToCarDto(Car car);
+    Car updateCarFromCarDto(CarDto carDto, @MappingTarget Car car);
     Car carDtoToCar(CarDto carDto);
 
     @Mappings({@Mapping(target = "cars", ignore = true), @Mapping(target = "reviewOnCar", ignore = true)})

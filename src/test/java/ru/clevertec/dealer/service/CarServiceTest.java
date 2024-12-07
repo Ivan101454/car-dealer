@@ -1,13 +1,11 @@
 package ru.clevertec.dealer.service;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.clevertec.dealer.dto.CarDto;
 import ru.clevertec.dealer.filter.CarParam;
-import ru.clevertec.dealer.repository.CarRepository;
 import ru.clevertec.dealer.utils.HibernateUtil;
 
 import java.math.BigDecimal;
@@ -21,13 +19,13 @@ class CarServiceTest {
     private static CarService carService;
     private static Session session;
 
-    @BeforeAll
-    static void init() {
-        session = HibernateUtil.initDatabaseSession();
-        session.beginTransaction();
-        CarRepository carRepository = new CarRepository(session);
-        carService = new CarService(carRepository);
-    }
+//    @BeforeAll
+//    static void init() {
+//        session = HibernateUtil.initDatabaseSession();
+//        session.beginTransaction();
+//        CarRepository carRepository = new CarRepository(session);
+//        carService = new CarService(carRepository);
+//    }
 
     @AfterAll
     static void close() {

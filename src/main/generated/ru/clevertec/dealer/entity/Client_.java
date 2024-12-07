@@ -1,5 +1,6 @@
 package ru.clevertec.dealer.entity;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.ListAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
@@ -7,6 +8,7 @@ import jakarta.persistence.metamodel.StaticMetamodel;
 import java.time.LocalDate;
 
 @StaticMetamodel(Client.class)
+@Generated("org.hibernate.processor.HibernateProcessor")
 public abstract class Client_ {
 
 	public static final String CARS = "cars";

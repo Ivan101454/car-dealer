@@ -1,11 +1,13 @@
 package ru.clevertec.dealer.entity;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.ListAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
 
 @StaticMetamodel(CarShowroom.class)
+@Generated("org.hibernate.processor.HibernateProcessor")
 public abstract class CarShowroom_ {
 
 	public static final String ADDRESS_OF_SHOWROOM = "addressOfShowroom";

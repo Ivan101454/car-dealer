@@ -3,10 +3,9 @@ package ru.clevertec.dealer.service;
 import lombok.RequiredArgsConstructor;
 import ru.clevertec.dealer.dto.CarDto;
 import ru.clevertec.dealer.dto.CarShowroomDto;
-import ru.clevertec.dealer.entity.Car;
 import ru.clevertec.dealer.entity.CarShowroom;
 import ru.clevertec.dealer.mapper.CarMapper;
-import ru.clevertec.dealer.repository.CarShowroomRepository;
+import ru.clevertec.dealer.dao.CarShowroomRepository;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,14 +1,10 @@
 package ru.clevertec.dealer.service;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.event.internal.ReattachVisitor;
-import ru.clevertec.dealer.dto.CarDto;
 import ru.clevertec.dealer.dto.ReviewDto;
-import ru.clevertec.dealer.entity.Car;
 import ru.clevertec.dealer.entity.Review;
 import ru.clevertec.dealer.mapper.CarMapper;
-import ru.clevertec.dealer.repository.CarRepository;
-import ru.clevertec.dealer.repository.ReviewRepository;
+import ru.clevertec.dealer.dao.ReviewRepository;
 
 import java.util.List;
 import java.util.Optional;

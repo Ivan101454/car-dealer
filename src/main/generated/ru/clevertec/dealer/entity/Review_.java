@@ -1,10 +1,12 @@
 package ru.clevertec.dealer.entity;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
 
 @StaticMetamodel(Review.class)
+@Generated("org.hibernate.processor.HibernateProcessor")
 public abstract class Review_ {
 
 	public static final String CAR = "car";

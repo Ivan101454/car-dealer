@@ -10,7 +10,7 @@
 Добавление отзыва клиента на автомобиль.\
 ### реальзованы соответствущие методы в сервисном слое
 ### организован поиск автомобиля по фильтру с помощью Criteria API класс-фильтр CarParam содержащий поля-фильтры с пагинцией номера старницы и количества записей на ней, пример в тесте ru.clevertec.dealer.service.CarServiceTest.getCarsByFilter
-### организован поиск отзывов по ключевым словам ru.clevertec.dealer.repository.ReviewRepository.findByKeywords
+### организован поиск отзывов по ключевым словам ru.clevertec.dealer.dao.ReviewRepository.findByKeywords
 
 ## Решение проблемы N+1 
 ### Все отношения находятся в Lazy

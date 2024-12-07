@@ -16,7 +16,7 @@ import ru.clevertec.dealer.entity.Review;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-04T19:41:38+0300",
+    date = "2024-12-08T00:40:25+0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 public class CarMapperImpl implements CarMapper {
@@ -68,6 +68,54 @@ public class CarMapperImpl implements CarMapper {
         carDto.clients( clientListToClientDtoList( car.getClients() ) );
 
         return carDto.build();
+    }
+
+    @Override
+    public Car updateCarFromCarDto(CarDto carDto, Car car) {
+        if ( carDto == null ) {
+            return car;
+        }
+
+        car.setCarBrand( carDto.getCarBrand() );
+        car.setCarModel( carDto.getCarModel() );
+        car.setYear( carDto.getYear() );
+        car.setPrice( carDto.getPrice() );
+        car.setCategoryBody( categoryDtoToCategory( carDto.getCategoryBody() ) );
+        car.setCarShowroom( carShowroomDtoToCarShowroom( carDto.getCarShowroom() ) );
+        if ( car.getReviewsOnCar() != null ) {
+            List<Review> list = reviewDtoListToReviewList( carDto.getReviewsOnCar() );
+            if ( list != null ) {
+                car.getReviewsOnCar().clear();
+                car.getReviewsOnCar().addAll( list );
+            }
+            else {
+                car.setReviewsOnCar( null );
+            }
+        }
+        else {
+            List<Review> list = reviewDtoListToReviewList( carDto.getReviewsOnCar() );
+            if ( list != null ) {
+                car.setReviewsOnCar( list );
+            }
+        }
+        if ( car.getClients() != null ) {
+            List<Client> list1 = clientDtoListToClientList( carDto.getClients() );
+            if ( list1 != null ) {
+                car.getClients().clear();
+                car.getClients().addAll( list1 );
+            }
+            else {
+                car.setClients( null );
+            }
+        }
+        else {
+            List<Client> list1 = clientDtoListToClientList( carDto.getClients() );
+            if ( list1 != null ) {
+                car.setClients( list1 );
+            }
+        }
+
+        return car;
     }
 
     @Override

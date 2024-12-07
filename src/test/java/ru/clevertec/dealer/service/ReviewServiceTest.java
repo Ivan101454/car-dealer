@@ -5,8 +5,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.clevertec.dealer.dto.ReviewDto;
-import ru.clevertec.dealer.repository.CarRepository;
-import ru.clevertec.dealer.repository.ReviewRepository;
+import ru.clevertec.dealer.dao.ReviewRepository;
 import ru.clevertec.dealer.utils.HibernateUtil;
 
 import java.util.List;

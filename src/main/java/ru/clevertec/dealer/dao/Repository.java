@@ -1,4 +1,4 @@
-package ru.clevertec.dealer.repository;
+package ru.clevertec.dealer.dao;
 
 import java.util.List;
 import java.util.Optional;

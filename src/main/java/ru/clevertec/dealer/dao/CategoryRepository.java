@@ -1,4 +1,4 @@
-package ru.clevertec.dealer.repository;
+package ru.clevertec.dealer.dao;
 
 import org.hibernate.Session;
 import ru.clevertec.dealer.entity.Category;

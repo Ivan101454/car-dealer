@@ -1,5 +1,6 @@
 package ru.clevertec.dealer.entity;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.ListAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
@@ -7,6 +8,7 @@ import jakarta.persistence.metamodel.StaticMetamodel;
 import ru.clevertec.dealer.enums.Body;
 
 @StaticMetamodel(Category.class)
+@Generated("org.hibernate.processor.HibernateProcessor")
 public abstract class Category_ {
 
 	public static final String BODY = "body";

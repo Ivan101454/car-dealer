@@ -1,49 +1,54 @@
 package ru.clevertec.dealer.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
+import ru.clevertec.dealer.dao.CarRepositoryCustom;
 import ru.clevertec.dealer.dto.CarDto;
-import ru.clevertec.dealer.dto.CarShowroomDto;
 import ru.clevertec.dealer.entity.Car;
-import ru.clevertec.dealer.entity.CarShowroom;
 import ru.clevertec.dealer.filter.CarParam;
 import ru.clevertec.dealer.mapper.CarMapper;
 import ru.clevertec.dealer.repository.CarRepository;
 
-import java.awt.print.Pageable;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @RequiredArgsConstructor
 public class CarService {
 
     private final CarRepository carRepository;
+    private final CarRepositoryCustom carRepositoryCustom;
+    private final CarMapper INSTANCE;
 
     public Optional<CarDto> findById(Long id) {
-        return carRepository.finById(id).map(CarMapper.INSTANCE::carToCarDto);
+        return carRepository.findById(id).map(INSTANCE::carToCarDto);
     }
 
     public List<CarDto> findAllCars() {
-        return carRepository.findAll().stream().map(CarMapper.INSTANCE::carToCarDto).toList();
+        return carRepository.findAll().stream().map(INSTANCE::carToCarDto).toList();
     }
 
     public Optional<CarDto> create(CarDto carDto) {
-        Car car = CarMapper.INSTANCE.carDtoToCar(carDto);
+        Car car = INSTANCE.carDtoToCar(carDto);
         carRepository.save(car);
         return Optional.ofNullable(carDto);
     }
 
     public void update(Long id, CarDto carDto) {
-        carRepository.update(CarMapper.INSTANCE.carDtoToCar(carDto));
+        Car car = carRepository.findById(id).orElseThrow(() -> new RuntimeException("Не найдено по id"));
+        Car carUpdate = INSTANCE.updateCarFromCarDto(carDto, car);
+        carRepository.save(carUpdate);
     }
 
     public boolean delete(Long id) {
-        Optional<Car> car = carRepository.finById(id);
-        car.ifPresent(a -> carRepository.delete(a.getCarId()));
+        Optional<Car> car = carRepository.findById(id);
+        car.ifPresent(a -> carRepository.delete(car.get()));
         return car.isPresent();
     }
 
     public List<CarDto> getCarsByFilter(CarParam carParam, int pageNumber, int pageSize) {
-        List<Car> filterCar = carRepository.getFilterCar(carParam, pageNumber, pageSize);
+        List<Car> filterCar = carRepositoryCustom.getFilterCar(carParam, pageNumber, pageSize);
         return filterCar.stream().map(CarMapper.INSTANCE::carToCarDto).toList();
     }
 
