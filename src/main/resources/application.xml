@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd
+		 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+
+    <context:component-scan base-package="ru.clevertec.dealer" />
+    <context:annotation-config />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <jpa:repositories base-package="ru.clevertec.dealer.repository" />
+
+    <bean id="carController" class="ru.clevertec.dealer.controller.CarController">
+        <constructor-arg ref="carService"/>
+    </bean>
+
+    <bean id="carService" class="ru.clevertec.dealer.service.CarService">
+        <constructor-arg ref="carRepository"/>
+        <constructor-arg ref="carMapper"/>
+        <constructor-arg ref="carRepositoryCustom"/>
+    </bean>
+
+
+    <bean id="carRepositoryCustom" class="ru.clevertec.dealer.dao.CarRepositoryCustom">
+    </bean>
+
+
+
+    <bean id="carMapper" class="org.mapstruct.factory.Mappers" factory-method="getMapper">
+        <constructor-arg value="ru.clevertec.dealer.mapper.CarMapper" />
+    </bean>
+
+
+</beans>

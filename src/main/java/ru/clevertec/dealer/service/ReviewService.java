@@ -1,0 +1,44 @@
+package ru.clevertec.dealer.service;
+
+import lombok.RequiredArgsConstructor;
+import ru.clevertec.dealer.dto.ReviewDto;
+import ru.clevertec.dealer.entity.Review;
+import ru.clevertec.dealer.mapper.CarMapper;
+import ru.clevertec.dealer.dao.ReviewRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+@RequiredArgsConstructor
+public class ReviewService {
+
+    private final ReviewRepository reviewRepository;
+
+    public Optional<ReviewDto> findById(Long id) {
+        return reviewRepository.finById(id).map(CarMapper.INSTANCE::reviewToReviewDto);
+    }
+
+    public List<ReviewDto> findAllStore() {
+        return reviewRepository.findAll().stream().map(CarMapper.INSTANCE::reviewToReviewDto).toList();
+    }
+
+    public Review create(ReviewDto reviewDto) {
+        Review review = CarMapper.INSTANCE.reviewDtoToReview(reviewDto);
+        return reviewRepository.save(review);
+    }
+
+    public void update(ReviewDto reviewDto) {
+        reviewRepository.update(CarMapper.INSTANCE.reviewDtoToReview(reviewDto));
+    }
+
+    public boolean delete(Long id) {
+        Optional<Review> review = reviewRepository.finById(id);
+        review.ifPresent(a -> reviewRepository.delete(a.getReviewId()));
+        return review.isPresent();
+    }
+
+    public List<ReviewDto> findReviewByKeywords(List<String> keywords, int pageNumber, int pageSize) {
+        List<String> list = keywords.stream().map(String::toLowerCase).toList();
+        return reviewRepository.findByKeywords(list, pageNumber, pageSize).stream().map(CarMapper.INSTANCE::reviewToReviewDto).toList();
+    }
+}
