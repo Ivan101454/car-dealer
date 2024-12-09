@@ -1,5 +1,7 @@
 package ru.clevertec.dealer.mapper;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -13,10 +15,11 @@ import ru.clevertec.dealer.entity.CarShowroom;
 import ru.clevertec.dealer.entity.Category;
 import ru.clevertec.dealer.entity.Client;
 import ru.clevertec.dealer.entity.Review;
+import ru.clevertec.dealer.enums.Body;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-08T00:40:25+0300",
+    date = "2024-12-10T00:39:35+0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 public class CarMapperImpl implements CarMapper {
@@ -27,12 +30,17 @@ public class CarMapperImpl implements CarMapper {
             return null;
         }
 
-        CarShowroomDto.CarShowroomDtoBuilder carShowroomDto = CarShowroomDto.builder();
+        String nameOfShowroom = null;
+        String addressOfShowroom = null;
 
-        carShowroomDto.nameOfShowroom( carShowroom.getNameOfShowroom() );
-        carShowroomDto.addressOfShowroom( carShowroom.getAddressOfShowroom() );
+        nameOfShowroom = carShowroom.getNameOfShowroom();
+        addressOfShowroom = carShowroom.getAddressOfShowroom();
 
-        return carShowroomDto.build();
+        List<CarDto> carInStore = null;
+
+        CarShowroomDto carShowroomDto = new CarShowroomDto( nameOfShowroom, addressOfShowroom, carInStore );
+
+        return carShowroomDto;
     }
 
     @Override
@@ -43,9 +51,9 @@ public class CarMapperImpl implements CarMapper {
 
         CarShowroom.CarShowroomBuilder carShowroom = CarShowroom.builder();
 
-        carShowroom.nameOfShowroom( carShowroomDto.getNameOfShowroom() );
-        carShowroom.addressOfShowroom( carShowroomDto.getAddressOfShowroom() );
-        carShowroom.carInStore( carDtoListToCarList( carShowroomDto.getCarInStore() ) );
+        carShowroom.nameOfShowroom( carShowroomDto.nameOfShowroom() );
+        carShowroom.addressOfShowroom( carShowroomDto.addressOfShowroom() );
+        carShowroom.carInStore( carDtoListToCarList( carShowroomDto.carInStore() ) );
 
         return carShowroom.build();
     }
@@ -56,18 +64,27 @@ public class CarMapperImpl implements CarMapper {
             return null;
         }
 
-        CarDto.CarDtoBuilder carDto = CarDto.builder();
+        String carBrand = null;
+        String carModel = null;
+        int year = 0;
+        BigDecimal price = null;
+        CategoryDto categoryBody = null;
+        CarShowroomDto carShowroom = null;
+        List<ReviewDto> reviewsOnCar = null;
+        List<ClientDto> clients = null;
 
-        carDto.carBrand( car.getCarBrand() );
-        carDto.carModel( car.getCarModel() );
-        carDto.year( car.getYear() );
-        carDto.price( car.getPrice() );
-        carDto.categoryBody( categoryToCategoryDto( car.getCategoryBody() ) );
-        carDto.carShowroom( carShowroomToCarShowroomDto( car.getCarShowroom() ) );
-        carDto.reviewsOnCar( reviewListToReviewDtoList( car.getReviewsOnCar() ) );
-        carDto.clients( clientListToClientDtoList( car.getClients() ) );
+        carBrand = car.getCarBrand();
+        carModel = car.getCarModel();
+        year = car.getYear();
+        price = car.getPrice();
+        categoryBody = categoryToCategoryDto( car.getCategoryBody() );
+        carShowroom = carShowroomToCarShowroomDto( car.getCarShowroom() );
+        reviewsOnCar = reviewListToReviewDtoList( car.getReviewsOnCar() );
+        clients = clientListToClientDtoList( car.getClients() );
 
-        return carDto.build();
+        CarDto carDto = new CarDto( carBrand, carModel, year, price, categoryBody, carShowroom, reviewsOnCar, clients );
+
+        return carDto;
     }
 
     @Override
@@ -76,14 +93,14 @@ public class CarMapperImpl implements CarMapper {
             return car;
         }
 
-        car.setCarBrand( carDto.getCarBrand() );
-        car.setCarModel( carDto.getCarModel() );
-        car.setYear( carDto.getYear() );
-        car.setPrice( carDto.getPrice() );
-        car.setCategoryBody( categoryDtoToCategory( carDto.getCategoryBody() ) );
-        car.setCarShowroom( carShowroomDtoToCarShowroom( carDto.getCarShowroom() ) );
+        car.setCarBrand( carDto.carBrand() );
+        car.setCarModel( carDto.carModel() );
+        car.setYear( carDto.year() );
+        car.setPrice( carDto.price() );
+        car.setCategoryBody( categoryDtoToCategory( carDto.categoryBody() ) );
+        car.setCarShowroom( carShowroomDtoToCarShowroom( carDto.carShowroom() ) );
         if ( car.getReviewsOnCar() != null ) {
-            List<Review> list = reviewDtoListToReviewList( carDto.getReviewsOnCar() );
+            List<Review> list = reviewDtoListToReviewList( carDto.reviewsOnCar() );
             if ( list != null ) {
                 car.getReviewsOnCar().clear();
                 car.getReviewsOnCar().addAll( list );
@@ -93,13 +110,13 @@ public class CarMapperImpl implements CarMapper {
             }
         }
         else {
-            List<Review> list = reviewDtoListToReviewList( carDto.getReviewsOnCar() );
+            List<Review> list = reviewDtoListToReviewList( carDto.reviewsOnCar() );
             if ( list != null ) {
                 car.setReviewsOnCar( list );
             }
         }
         if ( car.getClients() != null ) {
-            List<Client> list1 = clientDtoListToClientList( carDto.getClients() );
+            List<Client> list1 = clientDtoListToClientList( carDto.clients() );
             if ( list1 != null ) {
                 car.getClients().clear();
                 car.getClients().addAll( list1 );
@@ -109,7 +126,7 @@ public class CarMapperImpl implements CarMapper {
             }
         }
         else {
-            List<Client> list1 = clientDtoListToClientList( carDto.getClients() );
+            List<Client> list1 = clientDtoListToClientList( carDto.clients() );
             if ( list1 != null ) {
                 car.setClients( list1 );
             }
@@ -126,14 +143,14 @@ public class CarMapperImpl implements CarMapper {
 
         Car.CarBuilder car = Car.builder();
 
-        car.carBrand( carDto.getCarBrand() );
-        car.carModel( carDto.getCarModel() );
-        car.year( carDto.getYear() );
-        car.price( carDto.getPrice() );
-        car.categoryBody( categoryDtoToCategory( carDto.getCategoryBody() ) );
-        car.carShowroom( carShowroomDtoToCarShowroom( carDto.getCarShowroom() ) );
-        car.reviewsOnCar( reviewDtoListToReviewList( carDto.getReviewsOnCar() ) );
-        car.clients( clientDtoListToClientList( carDto.getClients() ) );
+        car.carBrand( carDto.carBrand() );
+        car.carModel( carDto.carModel() );
+        car.year( carDto.year() );
+        car.price( carDto.price() );
+        car.categoryBody( categoryDtoToCategory( carDto.categoryBody() ) );
+        car.carShowroom( carShowroomDtoToCarShowroom( carDto.carShowroom() ) );
+        car.reviewsOnCar( reviewDtoListToReviewList( carDto.reviewsOnCar() ) );
+        car.clients( clientDtoListToClientList( carDto.clients() ) );
 
         return car.build();
     }
@@ -144,16 +161,23 @@ public class CarMapperImpl implements CarMapper {
             return null;
         }
 
-        ClientDto.ClientDtoBuilder clientDto = ClientDto.builder();
+        String nameOfCustomer = null;
+        List<String> contacts = null;
+        LocalDate dateOfRegistration = null;
 
-        clientDto.nameOfCustomer( client.getNameOfCustomer() );
+        nameOfCustomer = client.getNameOfCustomer();
         List<String> list = client.getContacts();
         if ( list != null ) {
-            clientDto.contacts( new ArrayList<String>( list ) );
+            contacts = new ArrayList<String>( list );
         }
-        clientDto.dateOfRegistration( client.getDateOfRegistration() );
+        dateOfRegistration = client.getDateOfRegistration();
 
-        return clientDto.build();
+        List<CarDto> cars = null;
+        List<ReviewDto> reviewOnCar = null;
+
+        ClientDto clientDto = new ClientDto( nameOfCustomer, contacts, dateOfRegistration, cars, reviewOnCar );
+
+        return clientDto;
     }
 
     @Override
@@ -164,14 +188,14 @@ public class CarMapperImpl implements CarMapper {
 
         Client.ClientBuilder client = Client.builder();
 
-        client.nameOfCustomer( clientDto.getNameOfCustomer() );
-        List<String> list = clientDto.getContacts();
+        client.nameOfCustomer( clientDto.nameOfCustomer() );
+        List<String> list = clientDto.contacts();
         if ( list != null ) {
             client.contacts( new ArrayList<String>( list ) );
         }
-        client.dateOfRegistration( clientDto.getDateOfRegistration() );
-        client.cars( carDtoListToCarList( clientDto.getCars() ) );
-        client.reviewOnCar( reviewDtoListToReviewList( clientDto.getReviewOnCar() ) );
+        client.dateOfRegistration( clientDto.dateOfRegistration() );
+        client.cars( carDtoListToCarList( clientDto.cars() ) );
+        client.reviewOnCar( reviewDtoListToReviewList( clientDto.reviewOnCar() ) );
 
         return client.build();
     }
@@ -182,11 +206,15 @@ public class CarMapperImpl implements CarMapper {
             return null;
         }
 
-        CategoryDto.CategoryDtoBuilder categoryDto = CategoryDto.builder();
+        Body body = null;
 
-        categoryDto.body( category.getBody() );
+        body = category.getBody();
 
-        return categoryDto.build();
+        List<CarDto> listOfCar = null;
+
+        CategoryDto categoryDto = new CategoryDto( body, listOfCar );
+
+        return categoryDto;
     }
 
     @Override
@@ -197,8 +225,8 @@ public class CarMapperImpl implements CarMapper {
 
         Category.CategoryBuilder category = Category.builder();
 
-        category.body( categoryDto.getBody() );
-        category.listOfCar( carDtoListToCarList( categoryDto.getListOfCar() ) );
+        category.body( categoryDto.body() );
+        category.listOfCar( carDtoListToCarList( categoryDto.listOfCar() ) );
 
         return category.build();
     }
@@ -209,13 +237,19 @@ public class CarMapperImpl implements CarMapper {
             return null;
         }
 
-        ReviewDto.ReviewDtoBuilder reviewDto = ReviewDto.builder();
+        String textReview = null;
+        int rating = 0;
+        ClientDto client = null;
 
-        reviewDto.textReview( review.getTextReview() );
-        reviewDto.rating( review.getRating() );
-        reviewDto.client( clientToClientDto( review.getClient() ) );
+        textReview = review.getTextReview();
+        rating = review.getRating();
+        client = clientToClientDto( review.getClient() );
 
-        return reviewDto.build();
+        CarDto car = null;
+
+        ReviewDto reviewDto = new ReviewDto( textReview, rating, client, car );
+
+        return reviewDto;
     }
 
     @Override
@@ -226,10 +260,10 @@ public class CarMapperImpl implements CarMapper {
 
         Review.ReviewBuilder review = Review.builder();
 
-        review.textReview( reviewDto.getTextReview() );
-        review.rating( reviewDto.getRating() );
-        review.client( clientDtoToClient( reviewDto.getClient() ) );
-        review.car( carDtoToCar( reviewDto.getCar() ) );
+        review.textReview( reviewDto.textReview() );
+        review.rating( reviewDto.rating() );
+        review.client( clientDtoToClient( reviewDto.client() ) );
+        review.car( carDtoToCar( reviewDto.car() ) );
 
         return review.build();
     }
