@@ -43,6 +43,7 @@ public class DatabaseInit {
         dataSource.setUrl(getProperties().getProperty("spring.datasource.url"));
         dataSource.setUsername(getProperties().getProperty("spring.datasource.username"));
         dataSource.setPassword(getProperties().getProperty("spring.datasource.password"));
+        dataSource.setSchema("dealer");
         return dataSource;
     }
 
