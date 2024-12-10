@@ -53,6 +53,9 @@ public class Client {
     private List<Review> reviewOnCar;
 
     public void buyACar(Car car) {
+        List<Client> clients = car.getClients();
+        clients.add(this);
+        car.setClients(clients);
         cars.add(car);
     }
 
