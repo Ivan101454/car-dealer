@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import javax.sql.DataSource;
 
 @UtilityClass
-public class LuqidUtil {
+public class LiquidUtil {
     public static  void DmlDatabase(ClassPathXmlApplicationContext context) {
         DataSource dataSource = context.getBean(DataSource.class);
         SpringLiquibase liquibase = new SpringLiquibase();
@@ -19,5 +19,6 @@ public class LuqidUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        context.close();
     }
 }
