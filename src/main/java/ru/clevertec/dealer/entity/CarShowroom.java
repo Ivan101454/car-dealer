@@ -30,7 +30,9 @@ public class CarShowroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "showroom_id")
     private Long showroomId;
+    @Column(name = "name_of_showroom")
     private String nameOfShowroom;
+    @Column(name = "address_of_showroom")
     private String addressOfShowroom;
     @OneToMany(mappedBy = "carShowroom", cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)

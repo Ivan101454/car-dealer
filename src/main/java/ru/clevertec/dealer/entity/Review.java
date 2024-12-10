@@ -27,6 +27,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long reviewId;
+    @Column(name = "text_review")
     private String textReview;
     private int rating;
     @ManyToOne(fetch = FetchType.LAZY)

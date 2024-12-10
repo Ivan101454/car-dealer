@@ -36,7 +36,9 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "car_id")
     private Long carId;
+    @Column(name = "car_brand")
     private String carBrand;
+    @Column(name = "car_model")
     private String carModel;
     private int year;
     private BigDecimal price;

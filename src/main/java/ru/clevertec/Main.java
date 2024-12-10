@@ -1,31 +1,17 @@
 package ru.clevertec;
 
-import liquibase.integration.spring.SpringLiquibase;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.clevertec.dealer.utils.LuqidUtil;
-
-import javax.sql.DataSource;
+import ru.clevertec.dealer.utils.LiquidUtil;
 
 
 public class Main {
 
     public static void main(String[] args) {
-//        Session session = HibernateUtil.initDatabaseSession();
         var context = new ClassPathXmlApplicationContext("application.xml");
 
-        LuqidUtil.DmlDatabase(context);
+//  Инициализация БД
+        LiquidUtil.DmlDatabase(context);
 
-//        DataSource dataSource = context.getBean(DataSource.class);
-//        SpringLiquibase liquibase = new SpringLiquibase();
-//        liquibase.setDataSource(dataSource);
-//        liquibase.setChangeLog("classpath:db/changelog/db.changelog-master.yaml");
-//        try {
-//            liquibase.afterPropertiesSet();
-//            System.out.println("Liquibase migration completed.");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
 //        CarService bean = context.getBean(CarService.class);
 //        bean.findById(1L).ifPresent(System.out::println);

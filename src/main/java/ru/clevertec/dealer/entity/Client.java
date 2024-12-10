@@ -37,11 +37,13 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "client_id")
     private Long clientId;
+    @Column(name = "name_of_customer")
     private String nameOfCustomer;
     @ElementCollection(targetClass = String.class, fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     @CollectionTable(name = "contact", joinColumns = @JoinColumn(name = "client_id"), schema = "dealer")
     private List<String> contacts;
+    @Column(name = "date_of_registration")
     private LocalDate dateOfRegistration;
     @ManyToMany(mappedBy = "clients", cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
