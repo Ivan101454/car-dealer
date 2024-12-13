@@ -19,7 +19,7 @@ import ru.clevertec.dealer.enums.Body;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-10T00:39:35+0300",
+    date = "2024-12-12T18:51:16+0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 public class CarMapperImpl implements CarMapper {

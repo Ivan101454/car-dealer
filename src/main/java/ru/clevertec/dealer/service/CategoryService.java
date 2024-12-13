@@ -1,6 +1,7 @@
 package ru.clevertec.dealer.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.dealer.dto.CategoryDto;
 import ru.clevertec.dealer.entity.Category;
 import ru.clevertec.dealer.mapper.CarMapper;
@@ -9,6 +10,7 @@ import ru.clevertec.dealer.dao.CategoryRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @RequiredArgsConstructor
 public class CategoryService {
 

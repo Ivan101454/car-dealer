@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+//@Component
 public class SalesDataPostProcessor implements BeanPostProcessor {
 
     @Override

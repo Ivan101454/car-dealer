@@ -6,7 +6,12 @@
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		https://www.springframework.org/schema/beans/spring-beans.xsd
-		 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+		 http://www.springframework.org/schema/tx
+		 http://www.springframework.org/schema/tx/spring-tx.xsd
+		 http://www.springframework.org/schema/context
+		 https://www.springframework.org/schema/context/spring-context.xsd
+		 http://www.springframework.org/schema/data/jpa
+		 https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 
     <context:component-scan base-package="ru.clevertec.dealer" />
@@ -15,8 +20,10 @@
 
     <jpa:repositories base-package="ru.clevertec.dealer.repository" />
 
-    <bean id="carController" class="ru.clevertec.dealer.controller.CarController">
-        <constructor-arg ref="carService"/>
+    <bean id="salesDataPostProcessor" class="ru.clevertec.dealer.postprocessor.SalesDataPostProcessor"/>
+
+    <bean id="carMapper" class="org.mapstruct.factory.Mappers" factory-method="getMapper">
+        <constructor-arg value="ru.clevertec.dealer.mapper.CarMapper" />
     </bean>
 
     <bean id="carService" class="ru.clevertec.dealer.service.CarService">
@@ -25,14 +32,21 @@
         <constructor-arg ref="carRepositoryCustom"/>
     </bean>
 
+    <bean id="carShowroomService" class="ru.clevertec.dealer.service.CarShowroomService">
+        <constructor-arg ref="carShowroomRepository"/>
+        <constructor-arg ref="carMapper"/>
+    </bean>
 
-    <bean id="carRepositoryCustom" class="ru.clevertec.dealer.dao.CarRepositoryCustom">
+    <bean id="carController" class="ru.clevertec.dealer.controller.CarController">
+        <constructor-arg ref="carService"/>
+    </bean>
+
+    <bean id="carShowroomController" class="ru.clevertec.dealer.controller.CarShowroomController">
+        <constructor-arg ref="carShowroomService"/>
     </bean>
 
 
-
-    <bean id="carMapper" class="org.mapstruct.factory.Mappers" factory-method="getMapper">
-        <constructor-arg value="ru.clevertec.dealer.mapper.CarMapper" />
+    <bean id="carRepositoryCustom" class="ru.clevertec.dealer.dao.CarRepositoryCustom">
     </bean>
 
 

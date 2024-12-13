@@ -25,6 +25,7 @@ public interface CarMapper {
 
     @Mapping(target = "carInStore", ignore = true)
     CarShowroomDto carShowroomToCarShowroomDto(CarShowroom carShowroom);
+    CarShowroom updateCarShowroomFromCarShowroomDto(CarShowroomDto carShowroomDto, @MappingTarget CarShowroom carShowroom);
     CarShowroom carShowroomDtoToCarShowroom(CarShowroomDto carShowroomDto);
 
     CarDto carToCarDto(Car car);

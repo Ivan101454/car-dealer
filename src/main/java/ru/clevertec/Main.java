@@ -9,6 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         var context = new ClassPathXmlApplicationContext("application.xml");
+        context.getBean("CarShowroomController.class");
 
 ////  Инициализация БД
 //        LiquidUtil.DmlDatabase(context);
@@ -19,7 +20,7 @@ public class Main {
 //        CarParam param = CarParam.builder().maxPrice(BigDecimal.valueOf(1000000)).isRequiredSort(true).isDescent(true).build();
 //        bean.getCarsByFilter(param, 1, 2).forEach(System.out::println);
 
-        context.getBean(CarService.class);
+//        context.getBean(CarService.class);
 
     }
 

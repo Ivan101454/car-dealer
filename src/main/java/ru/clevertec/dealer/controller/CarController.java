@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.dealer.dto.CarDto;
+import ru.clevertec.dealer.dto.ReviewDto;
+import ru.clevertec.dealer.filter.CarParam;
 import ru.clevertec.dealer.service.CarService;
 
 import java.util.List;
@@ -30,8 +33,9 @@ public class CarController {
     }
 
     @GetMapping("/findall")
-    public ResponseEntity<List<CarDto>> findAllCar() {
-        List<CarDto> allCars = carService.findAllCars();
+    public ResponseEntity<List<CarDto>> findAllCar(@RequestParam(defaultValue = "1") int pageNumber,
+                                                   @RequestParam(defaultValue = "10") int pageSize) {
+        List<CarDto> allCars = carService.findAllCars(pageNumber, pageSize);
         return new ResponseEntity<>(allCars, HttpStatus.OK);
     }
 
@@ -48,5 +52,18 @@ public class CarController {
     @PostMapping("/delete")
     public void delete(@PathVariable Long id) {
         carService.delete(id);
+    }
+
+    @GetMapping("/finByParam")
+    public ResponseEntity<List<CarDto>> findByCarParam(@RequestBody CarParam carParam,
+                                                 @RequestParam(defaultValue = "1") int pageNumber,
+                                                 @RequestParam(defaultValue = "10") int pageSize) {
+        List<CarDto> carsByFilter = carService.getCarsByFilter(carParam, pageNumber, pageSize);
+        return new ResponseEntity<>(carsByFilter, HttpStatus.OK);
+    }
+
+    @PostMapping("/addreview")
+    public void addReview(Long id, @RequestBody ReviewDto reviewDto) {
+        carService.addReviewOnCar(id, reviewDto);
     }
 }
