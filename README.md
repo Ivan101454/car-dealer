@@ -1,3 +1,11 @@
+# Задание: Performance Monitoring Starter
+В ru.clevertec.springbootmetricstarter.annotation создаем аннотацию @MonitorPerformance,  
+которую в примере поставим над методом carService.findById(Long id) и затем мы получим время выполнения  
+этого метода, если оно будет больше минимально требуемого, в примере 100 мс.
+Результат:
+![](./result.png)
+
+
 # Hibernate в проекте "Автосалон" 
 ### Требуется
 1. Внести resources/hibernate.cfg.xml настройки для подключения к базе данных
@@ -18,5 +26,7 @@
 ### Над коллекциями стоит FetchMode.SUBSELECT
 
 ### Добавлен вывод статистики по забронированным автомобилям с помощью PostProcessor
+
+
 
 

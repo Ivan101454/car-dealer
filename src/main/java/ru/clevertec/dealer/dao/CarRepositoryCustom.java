@@ -12,6 +12,7 @@ import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 //import org.hibernate.query.criteria.JpaCriteriaQuery;
 import org.hibernate.query.criteria.JpaPredicate;
 import org.hibernate.query.criteria.JpaRoot;
+import org.springframework.stereotype.Repository;
 import ru.clevertec.dealer.entity.Car;
 import ru.clevertec.dealer.entity.Car_;
 import ru.clevertec.dealer.filter.CarParam;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
+@Repository
 public class CarRepositoryCustom {
 
     @PersistenceContext

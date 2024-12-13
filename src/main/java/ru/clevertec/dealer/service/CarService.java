@@ -3,6 +3,7 @@ package ru.clevertec.dealer.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.dealer.dao.CarRepositoryCustom;
 import ru.clevertec.dealer.dto.CarDto;
@@ -12,19 +13,21 @@ import ru.clevertec.dealer.exception.NotFoundException;
 import ru.clevertec.dealer.filter.CarParam;
 import ru.clevertec.dealer.mapper.CarMapper;
 import ru.clevertec.dealer.repository.CarRepository;
+import ru.clevertec.springbootmetricstarter.annotation.MonitorPerformance;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
 @Transactional
 @RequiredArgsConstructor
+@Service
 public class CarService {
 
     private final CarRepository carRepository;
     private final CarRepositoryCustom carRepositoryCustom;
     private final CarMapper INSTANCE;
 
+    @MonitorPerformance
     public Optional<CarDto> findById(Long id) {
         Optional<CarDto> carDto = carRepository.findById(id).map(INSTANCE::carToCarDto);
         carDto.orElseThrow(() -> new NotFoundException("Авто найдено по id"));

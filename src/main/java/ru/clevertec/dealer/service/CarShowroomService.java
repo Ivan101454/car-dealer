@@ -3,6 +3,7 @@ package ru.clevertec.dealer.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.dealer.dto.CarDto;
 import ru.clevertec.dealer.dto.CarShowroomDto;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
+@Service
 public class CarShowroomService {
 
     private final CarShowroomRepository carShowroomRepository;

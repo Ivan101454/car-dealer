@@ -36,7 +36,8 @@ public class DatabaseInit {
         return yml.getObject();
     }
 
-    @Bean public DataSource dataSource() {
+    @Bean
+    public DataSource dataSource() {
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(getProperties().getProperty("spring.datasource.driver-class-name"));

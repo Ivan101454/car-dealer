@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
 import ru.clevertec.dealer.dto.CarDto;
 import ru.clevertec.dealer.dto.CarShowroomDto;
 import ru.clevertec.dealer.dto.CategoryDto;
@@ -19,9 +20,10 @@ import ru.clevertec.dealer.enums.Body;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-12T18:51:16+0300",
+    date = "2024-12-13T22:34:41+0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
+@Component
 public class CarMapperImpl implements CarMapper {
 
     @Override
@@ -41,6 +43,34 @@ public class CarMapperImpl implements CarMapper {
         CarShowroomDto carShowroomDto = new CarShowroomDto( nameOfShowroom, addressOfShowroom, carInStore );
 
         return carShowroomDto;
+    }
+
+    @Override
+    public CarShowroom updateCarShowroomFromCarShowroomDto(CarShowroomDto carShowroomDto, CarShowroom carShowroom) {
+        if ( carShowroomDto == null ) {
+            return carShowroom;
+        }
+
+        carShowroom.setNameOfShowroom( carShowroomDto.nameOfShowroom() );
+        carShowroom.setAddressOfShowroom( carShowroomDto.addressOfShowroom() );
+        if ( carShowroom.getCarInStore() != null ) {
+            List<Car> list = carDtoListToCarList( carShowroomDto.carInStore() );
+            if ( list != null ) {
+                carShowroom.getCarInStore().clear();
+                carShowroom.getCarInStore().addAll( list );
+            }
+            else {
+                carShowroom.setCarInStore( null );
+            }
+        }
+        else {
+            List<Car> list = carDtoListToCarList( carShowroomDto.carInStore() );
+            if ( list != null ) {
+                carShowroom.setCarInStore( list );
+            }
+        }
+
+        return carShowroom;
     }
 
     @Override
@@ -98,7 +128,15 @@ public class CarMapperImpl implements CarMapper {
         car.setYear( carDto.year() );
         car.setPrice( carDto.price() );
         car.setCategoryBody( categoryDtoToCategory( carDto.categoryBody() ) );
-        car.setCarShowroom( carShowroomDtoToCarShowroom( carDto.carShowroom() ) );
+        if ( carDto.carShowroom() != null ) {
+            if ( car.getCarShowroom() == null ) {
+                car.setCarShowroom( CarShowroom.builder().build() );
+            }
+            updateCarShowroomFromCarShowroomDto( carDto.carShowroom(), car.getCarShowroom() );
+        }
+        else {
+            car.setCarShowroom( null );
+        }
         if ( car.getReviewsOnCar() != null ) {
             List<Review> list = reviewDtoListToReviewList( carDto.reviewsOnCar() );
             if ( list != null ) {

@@ -19,7 +19,7 @@ import ru.clevertec.dealer.entity.Review;
 import java.lang.annotation.Target;
 
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CarMapper {
     CarMapper INSTANCE = Mappers.getMapper(CarMapper.class);
 

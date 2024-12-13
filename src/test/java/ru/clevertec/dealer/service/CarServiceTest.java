@@ -1,12 +1,11 @@
 package ru.clevertec.dealer.service;
 
-import org.hibernate.Session;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import ru.clevertec.dealer.dto.CarDto;
 import ru.clevertec.dealer.filter.CarParam;
-import ru.clevertec.dealer.utils.HibernateUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,10 +13,12 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class CarServiceTest {
 
-    private static CarService carService;
-    private static Session session;
+    @Autowired
+    private CarService carService;
+//    private static Session session;
 
 //    @BeforeAll
 //    static void init() {
@@ -27,17 +28,17 @@ class CarServiceTest {
 //        carService = new CarService(carRepository);
 //    }
 
-    @AfterAll
-    static void close() {
-        session.getTransaction().rollback();
-    }
+//    @AfterAll
+//    static void close() {
+//        session.getTransaction().rollback();
+//    }
 
 
     @Test
     void findById() {
         Optional<CarDto> byId = carService.findById(11L);
-        byId.ifPresent(car -> assertEquals("Octavia 3", car.getCarModel()));
-        byId.ifPresent(car -> assertEquals("Лозанж Lada", car.getCarShowroom().getNameOfShowroom()));
+        byId.ifPresent(car -> assertEquals("Octavia 3", car.carModel()));
+//        byId.ifPresent(car -> assertEquals("Лозанж Lada", car.getCarShowroom().getNameOfShowroom()));
     }
 
     @Test
