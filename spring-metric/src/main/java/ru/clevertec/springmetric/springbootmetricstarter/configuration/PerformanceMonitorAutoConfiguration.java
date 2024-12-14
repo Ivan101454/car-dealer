@@ -1,4 +1,4 @@
-package ru.clevertec.springbootmetricstarter.configuration;
+package ru.clevertec.springmetric.springbootmetricstarter.configuration;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

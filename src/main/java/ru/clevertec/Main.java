@@ -2,18 +2,13 @@ package ru.clevertec;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.clevertec.dealer.dto.CarDto;
-import ru.clevertec.dealer.service.CarService;
-import ru.clevertec.dealer.utils.LiquidUtil;
-
-import java.util.Optional;
 
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
+
+
 //        var context = new ClassPathXmlApplicationContext("application.xml");
 //        CarService bean = context.getBean(CarService.class);
 //        bean.findById(1L).ifPresent(System.out::println);

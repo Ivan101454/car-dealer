@@ -1,4 +1,5 @@
-package ru.clevertec.springbootmetricstarter.configuration;
+package ru.clevertec.springmetric.springbootmetricstarter.configuration;
+
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

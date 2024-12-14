@@ -20,7 +20,7 @@ import ru.clevertec.dealer.enums.Body;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-13T22:34:41+0300",
+    date = "2024-12-14T01:25:49+0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 @Component

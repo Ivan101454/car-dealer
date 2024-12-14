@@ -13,7 +13,7 @@ import ru.clevertec.dealer.exception.NotFoundException;
 import ru.clevertec.dealer.filter.CarParam;
 import ru.clevertec.dealer.mapper.CarMapper;
 import ru.clevertec.dealer.repository.CarRepository;
-import ru.clevertec.springbootmetricstarter.annotation.MonitorPerformance;
+import ru.clevertec.springmetric.springbootmetricstarter.annotation.MonitorPerformance;
 
 import java.util.List;
 import java.util.Optional;

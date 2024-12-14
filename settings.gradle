@@ -1,2 +1,3 @@
 rootProject.name = 'car-dealer'
+include 'spring-metric'
 

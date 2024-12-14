@@ -1,4 +1,4 @@
-package ru.clevertec.springbootmetricstarter.annotation;
+package ru.clevertec.springmetric.springbootmetricstarter.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
