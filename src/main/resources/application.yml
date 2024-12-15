@@ -19,7 +19,7 @@ spring:
 application:
   metric:
     enabled: true
-    min-time-execute: 100
+    min-time-execute: 10
 
 page:
   number: 1

@@ -1,4 +1,4 @@
-package ru.clevertec.springmetric.springbootmetricstarter.configuration;
+package ru.clevertec.spingbootmetricstarter.configuration;
 
 
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class PerformanceMonitorAspect {
     private final PerformanceMonitorProperties performanceMonitorProperties;
     Logger logger = LoggerFactory.getLogger(PerformanceMonitorAspect.class);
 
-    @Around("@annotation(ru.clevertec.springmetric.springbootmetricstarter.annotation.MonitorPerformance)")
+    @Around("@annotation(ru.clevertec.spingbootmetricstarter.annotation.MonitorPerformance)")
     public Object methodExecuteTime(ProceedingJoinPoint joinPoint) throws Throwable {
         if(!performanceMonitorProperties.isEnabled()) {
             return joinPoint.proceed();

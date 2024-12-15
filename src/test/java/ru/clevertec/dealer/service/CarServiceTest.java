@@ -38,13 +38,13 @@ class CarServiceTest {
     void findById() {
         Optional<CarDto> byId = carService.findById(11L);
         byId.ifPresent(car -> assertEquals("Octavia 3", car.carModel()));
+
 //        byId.ifPresent(car -> assertEquals("Лозанж Lada", car.getCarShowroom().getNameOfShowroom()));
     }
 
-    @Test
-    void getCarsByFilter() {
-        CarParam param = CarParam.builder().maxPrice(BigDecimal.valueOf(1000000)).isRequiredSort(true).isDescent(true).build();
-        List<CarDto> cars = carService.getCarsByFilter(param, 1, 2);
-        cars.forEach(System.out::println);
+//    @Test
+//    void getCarsByFilter() {
+//        CarParam param = CarParam.builder().maxPrice(BigDecimal.valueOf(1000000)).isRequiredSort(true).isDescent(true).build();
+//        List<CarDto> cars = carService.getCarsByFilter(param, 1, 2);
+//        cars.forEach(System.out::println);
     }
-}

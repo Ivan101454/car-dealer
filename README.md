@@ -1,7 +1,23 @@
 # Задание: Performance Monitoring Starter
-В ru.clevertec.springbootmetricstarter.annotation создаем аннотацию @MonitorPerformance,  
-которую в примере поставим над методом carService.findById(Long id) и затем мы получим время выполнения  
-этого метода, если оно будет больше минимально требуемого, в примере 100 мс.
+В отдельном модуле spring-metric ru.clevertec.springbootmetricstarter.annotation создаем аннотацию @MonitorPerformance,  
+которую в примере поставим над методом в основном проекте car-dealer carService.findById(Long id) и затем мы получим время выполнения этого метода, если оно будет больше минимально требуемого, в примере 10 мс.   
+Аннотацию можно вкл/выкл и установливать порог времени срабатывания в application.yml основного проекта
+значениями enable и min-time-execute соответсвенно  
+
+![](./yml.png)  
+
+В модуле spring-metric реализована логика обработки это аннотации.  
+PerformanceMonitorProperties.java мапит данные из yml файла на свои поля аннотацией @ConfigurationProperties  
+PerformanceMonitorAutoConfiguration.java подтягивает properties класс и проверяет условие включены ли метрики  
+Если да создается бин PerformanceMonitorAspect.java. Который, в свою очередь, с помощю АОП библиотеки org.aspectj.lang перехватывает
+выполнение метода, который будет аннотирован @MonitorPerformance, и высчитывает разницу времени между началом и кончанием
+выполнения и метода и выводит лог с этим значение.  
+Формат выводa Method [methodName] executed in [executionTime] ms.  
+Был создан файл META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports содержащий имя конфиг класса,  
+для того, чтоб Boot знал, какие классы автоконфига подгружать при запуске приложения.  
+Был создан скрипт в build.gradle для опубликования jar в локальный maven repository.  
+И затем в основной проект была добавления зависимость на этот jar.
+
 Результат:
 ![](./result.png)
 

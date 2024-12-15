@@ -23,8 +23,5 @@ public class Main {
 //        bean.getCarsByFilter(param, 1, 2).forEach(System.out::println);
 
 //        context.getBean(CarService.class);
-
     }
-
-
 }

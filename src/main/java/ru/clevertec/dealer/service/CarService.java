@@ -1,5 +1,6 @@
 package ru.clevertec.dealer.service;
 
+import ru.clevertec.spingbootmetricstarter.annotation.MonitorPerformance;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +14,6 @@ import ru.clevertec.dealer.exception.NotFoundException;
 import ru.clevertec.dealer.filter.CarParam;
 import ru.clevertec.dealer.mapper.CarMapper;
 import ru.clevertec.dealer.repository.CarRepository;
-import ru.clevertec.springmetric.springbootmetricstarter.annotation.MonitorPerformance;
 
 import java.util.List;
 import java.util.Optional;
